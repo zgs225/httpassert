@@ -10,8 +10,8 @@ A HTTP response body assert tool for golang.
 ## Example
 
 ``` go
-func TestSomeHTTPRequest(t *testing.T) {
-  req := httptest.NewRequest("GET", "http://localhost/users?page=2")
+func TestSomeHTTPEndpoint(t *testing.T) {
+  req := httptest.NewRequest("GET", "http://localhost/users?page=2", nil)
   res := httptest.NewRecord()
 
   someHttpServer.ServeHTTP(res, req)
