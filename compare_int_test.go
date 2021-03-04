@@ -60,7 +60,7 @@ func runTestCases(t *testing.T, cases []testCase, fn interface{}) {
 		actual := ret[0].Bool()
 
 		if actual != tt.expected {
-			t.Errorf("compareBool error: want %v(%T), got %v(%T)\n", tt.expected, tt.expected, actual, actual)
+			t.Errorf("compare(%T(%v), %T(%v)) error: want %T(%v), got %T(%v)\n", tt.v1, tt.v1, tt.v2, tt.v2, tt.expected, tt.expected, actual, actual)
 		}
 	}
 }
