@@ -14,7 +14,7 @@ func TestSomeHTTPRequest(t *testing.T) {
   req := httptest.NewRequest("GET", "http://localhost/users?page=2")
   res := httptest.NewRecord()
 
-  httpServer.ServeHTTP(req, res)
+  someHttpServer.ServeHTTP(res, req)
 
   expected := Response{
     Total: 10,
