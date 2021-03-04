@@ -20,7 +20,7 @@ func EqualJSON(t *testing.T, expected interface{}, r io.Reader) {
 	av := reflect.New(ev.Type())
 
 	if err := json.NewDecoder(r).Decode(av.Interface()); err != nil {
-		t.Errorf("unexpected error when decoding: (%T) %v", err, err)
+		t.Errorf("unexpected error when decoding: %T(%v)", err, err)
 		return
 	}
 
