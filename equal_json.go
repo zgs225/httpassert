@@ -3,6 +3,7 @@ package httpassert
 import (
 	"encoding/json"
 	"io"
+	"io/ioutil"
 	"reflect"
 	"testing"
 )
@@ -19,7 +20,14 @@ func EqualJSON(t *testing.T, expected interface{}, r io.Reader) {
 
 	av := reflect.New(ev.Type())
 
-	if err := json.NewDecoder(r).Decode(av.Interface()); err != nil {
+	b, err := ioutil.ReadAll(r)
+
+	if err != nil {
+		t.Errorf("unexpected error when decoding: %T(%v)", err, err)
+		return
+	}
+
+	if err := json.Unmarshal(b, av.Interface()); err != nil {
 		t.Errorf("unexpected error when decoding: %T(%v)", err, err)
 		return
 	}
@@ -28,5 +36,5 @@ func EqualJSON(t *testing.T, expected interface{}, r io.Reader) {
 		return
 	}
 
-	t.Errorf("TODO: render error message")
+	renderJSONError(t, expected, b)
 }
