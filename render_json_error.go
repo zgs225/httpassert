@@ -2,6 +2,7 @@ package httpassert
 
 import (
 	"bytes"
+	"encoding/json"
 	"fmt"
 	"reflect"
 	"strconv"
@@ -10,7 +11,7 @@ import (
 
 func renderJSONError(t *testing.T, expected interface{}, b []byte) {
 	t.Errorf(
-		"error: unexpected value.\nwant:\n    %s\ngot:\n    %s\n",
+		"error: unexpected value.\nwant response:\n%s\ngot json:\n%s\n",
 		renderInterface(expected, 0),
 		renderJSON(b),
 	)
@@ -177,7 +178,13 @@ func renderArrayLikeValue(v reflect.Value, n int) string {
 }
 
 func renderJSON(b []byte) string {
-	return ""
+	buf := new(bytes.Buffer)
+
+	if err := json.Indent(buf, b, "", indentStr); err != nil {
+		panic(err)
+	}
+
+	return buf.String()
 }
 
 func isCompositeStructKind(k reflect.Kind) bool {
