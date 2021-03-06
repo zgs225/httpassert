@@ -1,4 +1,4 @@
-HTTP ASSERT[![Go Reference](https://pkg.go.dev/badge/github.com/zgs225/httpassert.svg)](https://pkg.go.dev/github.com/zgs225/httpassert) [![Go](https://github.com/zgs225/httpassert/actions/workflows/go.yml/badge.svg?branch=main)](https://github.com/zgs225/httpassert/actions/workflows/go.yml) [![Coverage Status](https://coveralls.io/repos/github/zgs225/httpassert/badge.svg?branch=main)](https://coveralls.io/github/zgs225/httpassert?branch=main)
+HTTP ASSERT[![Go Reference](https://pkg.go.dev/badge/github.com/zgs225/httpassert.svg)](https://pkg.go.dev/github.com/zgs225/httpassert) [![Go](https://github.com/zgs225/httpassert/actions/workflows/go.yml/badge.svg?branch=main)](https://github.com/zgs225/httpassert/actions/workflows/go.yml) [![Coverage Status](https://coveralls.io/repos/github/zgs225/httpassert/badge.svg?branch=main)](https://coveralls.io/github/zgs225/httpassert?branch=main) [![Go Report Card](https://goreportcard.com/badge/github.com/zgs225/httpassert)](https://goreportcard.com/report/github.com/zgs225/httpassert)
 ===
 
 A HTTP response body assert tool for golang.
