@@ -119,34 +119,24 @@ func TestRenderValue(t *testing.T) {
     [4, 5, 6],
 ]`,
 		},
-		/* skip test map, since the keys is not sorted
+		{
+			val: []map[interface{}]interface{}{
 				{
-					val: []map[string]interface{}{
-						{
-							"name":   "John",
-							"age":    20,
-							"height": 178,
-						},
-						{
-							"name":   "Lily",
-							"age":    20,
-							"height": 170,
-						},
-					},
-					expected: `[
-		    {
-		        "name": "John",
-		        "age": 20,
-		        "height": 178,
-		    },
-		    {
-		        "name": "Lily",
-		        "age": 20,
-		        "height": 170,
-		    },
-		]`,
+					"name": "John",
 				},
-		*/
+				{
+					"name": "Lily",
+				},
+			},
+			expected: `[
+    {
+        "name": (string) "John",
+    },
+    {
+        "name": (string) "Lily",
+    },
+]`,
+		},
 	}
 
 	for _, tt := range tests {

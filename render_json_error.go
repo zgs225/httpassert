@@ -101,7 +101,7 @@ func renderMap(v reflect.Value, n int) string {
 		buf.WriteString(nindent(renderValue(key, n), indentStr, n+1))
 		buf.WriteByte(':')
 		buf.WriteByte(' ')
-		buf.WriteString(renderValue(val, n+1))
+		buf.WriteString(renderInterface(val.Interface(), n+1))
 		buf.WriteByte(',')
 	}
 
