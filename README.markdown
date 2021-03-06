@@ -36,3 +36,57 @@ func TestSomeHTTPEndpoint(t *testing.T) {
   httpassert.EqualJSON(t, expected, res.Body)
 }
 ```
+
+If test fail, the print info may like:
+
+```
+  render_json_error.go:13: error: unexpected value.                                                                                                                                [205/2264]
+      want response:
+      (struct response) {
+          Code: (int) 0,
+          Message: (string) "ok",
+          Data: (*struct paginationData) {
+              Total: (int64) 1234,
+              Offset: (int64) 30,
+              Limit: (int64) 15,
+              Previous: (string) "http://localhost/previous",
+              Next: (string) "http://localhost/next",
+              Items: ([]*struct user) [
+                  {
+                      Name: (string) "John",
+                      Age: (int) 18,
+                      Height: (float64) 182.3,
+                  },
+                  {
+                      Name: (string) "Lily",
+                      Age: (int) 22,
+                      Height: (float64) 170.8,
+                  },
+              ],
+          },
+      }
+      got json:
+      {
+          "code": 1,
+          "message": "ok",
+          "data": {
+              "total": 1234,
+              "offset": 30,
+              "limit": 15,
+              "previous": "http://localhost/previous",
+              "next": "http://localhost/next",
+              "items": [
+                  {
+                      "name": "John",
+                      "age": 18,
+                      "height": 182.3
+                  },
+                  {
+                      "name": "Lily",
+                      "age": 22,
+                      "height": 170.8
+                  }
+              ]
+          }
+      }
+```
