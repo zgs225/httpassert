@@ -6,8 +6,6 @@ import (
 	"reflect"
 )
 
-var boolType = reflect.TypeOf(true)
-
 func compareValues(v1, v2 reflect.Value) bool {
 	if v1.Kind() == reflect.Ptr || v1.Kind() == reflect.Interface {
 		return compareValues(v1.Elem(), v2)

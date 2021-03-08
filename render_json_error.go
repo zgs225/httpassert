@@ -7,6 +7,7 @@ import (
 	"reflect"
 	"strconv"
 	"testing"
+	"time"
 )
 
 func renderJSONError(t *testing.T, expected interface{}, b []byte) {
@@ -131,6 +132,11 @@ func renderMap(v reflect.Value, n int) string {
 func renderStruct(v reflect.Value, n int) string {
 	buf := new(bytes.Buffer)
 	typ := v.Type()
+
+	if typ == timeType {
+		buf.WriteString(v.Interface().(time.Time).String())
+		return buf.String()
+	}
 
 	buf.WriteByte('{')
 

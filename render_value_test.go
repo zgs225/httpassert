@@ -3,6 +3,7 @@ package httpassert
 import (
 	"reflect"
 	"testing"
+	"time"
 )
 
 func TestRenderValue(t *testing.T) {
@@ -136,6 +137,10 @@ func TestRenderValue(t *testing.T) {
         "name": (string) "Lily",
     },
 ]`,
+		},
+		{
+			val:      time.Date(2020, 1, 1, 10, 0, 0, 0, time.Local),
+			expected: "2020-01-01 10:00:00 +0800 CST",
 		},
 	}
 
