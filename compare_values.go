@@ -94,14 +94,14 @@ func compareComplex(v1, v2 reflect.Value, kind reflect.Kind) bool {
 	c1 := v1.Complex()
 	c2 := v2.Complex()
 
-	r1 := float32(real(c1))
-	r2 := float32(real(c2))
+	r1 := float64(real(c1))
+	r2 := float64(real(c2))
 
-	i1 := float32(imag(c1))
-	i2 := float32(imag(c2))
+	i1 := float64(imag(c1))
+	i2 := float64(imag(c2))
 
-	return math.Float32bits(r1) == math.Float32bits(r2) &&
-		math.Float32bits(i1) == math.Float32bits(i2)
+	return math.Float64bits(r1) == math.Float64bits(r2) &&
+		math.Float64bits(i1) == math.Float64bits(i2)
 }
 
 func compareArrayLike(v1, v2 reflect.Value, kind reflect.Kind) bool {
