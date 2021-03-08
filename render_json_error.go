@@ -67,10 +67,8 @@ func renderValue(v reflect.Value, n int) string {
 		return strconv.FormatFloat(v.Float(), 'f', -1, 32)
 	case reflect.Float64:
 		return strconv.FormatFloat(v.Float(), 'f', -1, 64)
-	case reflect.Complex64:
-		return strconv.FormatComplex(v.Complex(), 'f', -1, 64)
-	case reflect.Complex128:
-		return strconv.FormatComplex(v.Complex(), 'f', -1, 128)
+	case reflect.Complex64, reflect.Complex128:
+		return renderComplex(v)
 	case reflect.String:
 		return strconv.Quote(v.String())
 	case reflect.Ptr, reflect.Interface:
@@ -84,6 +82,25 @@ func renderValue(v reflect.Value, n int) string {
 	}
 
 	return ""
+}
+
+func renderComplex(v reflect.Value) string {
+	k := v.Kind()
+	c := v.Complex()
+	b := 64
+
+	if k == reflect.Complex64 {
+		b = 32
+	}
+
+	r := strconv.FormatFloat(real(c), 'f', -1, b)
+	i := strconv.FormatFloat(imag(c), 'f', -1, b)
+
+	if i[0] != '+' && i[0] != '-' {
+		i = "+" + i
+	}
+
+	return fmt.Sprintf("(%s%si)", r, i)
 }
 
 func renderMap(v reflect.Value, n int) string {
