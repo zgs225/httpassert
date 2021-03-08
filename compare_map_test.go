@@ -34,6 +34,19 @@ func TestCompareMap(t *testing.T) {
 			expected: true,
 		},
 		{
+			v1: map[string]string{
+				"hello": "world",
+				"ni":    "hao",
+				"go":    "version",
+			},
+			v2: map[string]interface{}{
+				"hello":   "world",
+				"ni":      "hao",
+				"version": "go",
+			},
+			expected: false,
+		},
+		{
 			v1:       map[string]string(nil),
 			v2:       "hello",
 			expected: false,
