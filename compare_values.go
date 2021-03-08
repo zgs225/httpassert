@@ -6,6 +6,8 @@ import (
 	"reflect"
 )
 
+var boolType = reflect.TypeOf(true)
+
 func compareValues(v1, v2 reflect.Value) bool {
 	if v1.Kind() == reflect.Ptr || v1.Kind() == reflect.Interface {
 		return compareValues(v1.Elem(), v2)
@@ -164,6 +166,20 @@ func compareStruct(v1, v2 reflect.Value) bool {
 		return false
 	}
 
+	// If the struct have method Equal, it only receive one argument that same
+	// type with v1, and only return one bool value. Then returns v1.Equal(v2)
+	method := v1.MethodByName("Equal")
+
+	if method.IsValid() {
+		methodType := method.Type()
+
+		if methodType.NumIn() == 1 && methodType.In(0) == v2.Type() && methodType.NumOut() == 1 && methodType.Out(0) == boolType {
+			rets := method.Call([]reflect.Value{v2})
+			return rets[0].Bool()
+		}
+	}
+
+	// Otherwise compare each field of the struct
 	for i := 0; i < type1.NumField(); i++ {
 		field1 := type1.Field(i)
 

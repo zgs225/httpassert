@@ -1,8 +1,14 @@
 package httpassert
 
-import "testing"
+import (
+	"testing"
+	"time"
+)
 
 func TestCompareStruct(t *testing.T) {
+	secondsEastOfUTC := int((8 * time.Hour).Seconds())
+	beijing := time.FixedZone("Beijing Time", secondsEastOfUTC)
+
 	tests := []testCase{
 		{
 			v1:       user{},
@@ -46,6 +52,21 @@ func TestCompareStruct(t *testing.T) {
 				Age:    18,
 				Height: 170.0,
 			},
+			expected: false,
+		},
+		{
+			v1:       time.Date(2020, 1, 1, 10, 0, 0, 0, time.Local),
+			v2:       time.Date(2020, 1, 1, 10, 0, 0, 0, time.Local),
+			expected: true,
+		},
+		{
+			v1:       time.Date(2000, 2, 1, 12, 30, 0, 0, time.UTC),
+			v2:       time.Date(2000, 2, 1, 20, 30, 0, 0, beijing),
+			expected: true,
+		},
+		{
+			v1:       time.Date(2020, 1, 1, 10, 0, 0, 0, time.Local),
+			v2:       time.Date(2021, 1, 1, 10, 0, 0, 0, time.Local),
 			expected: false,
 		},
 	}
