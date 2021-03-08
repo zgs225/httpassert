@@ -38,11 +38,21 @@ func renderType(typ reflect.Type) string {
 	case reflect.Ptr:
 		return fmt.Sprintf("*%s", renderType(typ.Elem()))
 	case reflect.Struct:
+		b := new(bytes.Buffer)
+
+		if len(typ.PkgPath()) > 0 {
+			b.WriteString(typ.PkgPath())
+			b.WriteByte('.')
+		}
+
 		name := typ.Name()
 		if len(name) == 0 {
 			name = "anonymous"
 		}
-		return fmt.Sprintf("struct %s", name)
+
+		b.WriteString(name)
+
+		return b.String()
 	case reflect.Array, reflect.Slice:
 		return fmt.Sprintf("[]%s", renderType(typ.Elem()))
 	case reflect.Map:

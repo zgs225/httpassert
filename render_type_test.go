@@ -3,6 +3,7 @@ package httpassert
 import (
 	"reflect"
 	"testing"
+	"time"
 )
 
 func TestRenderType(t *testing.T) {
@@ -76,15 +77,15 @@ func TestRenderType(t *testing.T) {
 		},
 		{
 			typ:      reflect.TypeOf(&user{}),
-			expected: "*struct user",
+			expected: "*github.com/zgs225/httpassert.user",
 		},
 		{
 			typ:      reflect.TypeOf(user{}),
-			expected: "struct user",
+			expected: "github.com/zgs225/httpassert.user",
 		},
 		{
 			typ:      reflect.TypeOf(struct{}{}),
-			expected: "struct anonymous",
+			expected: "anonymous",
 		},
 		{
 			typ:      reflect.TypeOf(map[string]interface{}{}),
@@ -96,11 +97,15 @@ func TestRenderType(t *testing.T) {
 		},
 		{
 			typ:      reflect.TypeOf(map[interface{}]*user{}),
-			expected: "map[interface]*struct user",
+			expected: "map[interface]*github.com/zgs225/httpassert.user",
 		},
 		{
 			typ:      reflect.TypeOf(make(chan *user)),
-			expected: "chan *struct user",
+			expected: "chan *github.com/zgs225/httpassert.user",
+		},
+		{
+			typ:      reflect.TypeOf(time.Now()),
+			expected: "time.Time",
 		},
 	}
 

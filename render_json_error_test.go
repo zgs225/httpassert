@@ -29,16 +29,16 @@ func TestRenderInterface(t *testing.T) {
 
 	actual := renderInterface(i, 0)
 
-	expected := `(struct response) {
+	expected := `(github.com/zgs225/httpassert.response) {
     Code: (int) 0,
     Message: (string) "ok",
-    Data: (*struct paginationData) {
+    Data: (*github.com/zgs225/httpassert.paginationData) {
         Total: (uint64) 1234,
         Offset: (int64) 30,
         Limit: (int64) 15,
         Previous: (string) "http://localhost/previous",
         Next: (string) "http://localhost/next",
-        Items: ([]*struct user) [
+        Items: ([]*github.com/zgs225/httpassert.user) [
             {
                 Name: (string) "John",
                 Age: (int) 18,
