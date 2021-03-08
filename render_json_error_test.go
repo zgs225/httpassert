@@ -33,7 +33,7 @@ func TestRenderInterface(t *testing.T) {
     Code: (int) 0,
     Message: (string) "ok",
     Data: (*struct paginationData) {
-        Total: (int64) 1234,
+        Total: (uint64) 1234,
         Offset: (int64) 30,
         Limit: (int64) 15,
         Previous: (string) "http://localhost/previous",

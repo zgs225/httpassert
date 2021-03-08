@@ -12,7 +12,7 @@ type response struct {
 }
 
 type paginationData struct {
-	Total    int64       `json:"total"`
+	Total    uint64      `json:"total"`
 	Offset   int64       `json:"offset"`
 	Limit    int64       `json:"limit"`
 	Previous string      `json:"previous"`
@@ -74,8 +74,49 @@ func TestCompareValues(t *testing.T) {
 			},
 		},
 	}
+	tests := []struct {
+		arg1     interface{}
+		arg2     interface{}
+		expected bool
+	}{
+		{
+			arg1:     r1,
+			arg2:     r2,
+			expected: true,
+		},
+		{
+			arg1:     map[string]string{"ni": "hao", "hello": "world"},
+			arg2:     map[string]string{"hello": "world", "ni": "hao"},
+			expected: true,
+		},
+		{
+			arg1:     complex(1.0, 1.0),
+			arg2:     complex(1.0, 1.0),
+			expected: true,
+		},
+		{
+			arg1:     complex64(complex(1.0, 1.0)),
+			arg2:     complex64(complex(1.0, 1.0)),
+			expected: true,
+		},
+		{
+			arg1:     complex(1.0, 1.0),
+			arg2:     complex64(complex(1.0, 1.0)),
+			expected: false,
+		},
+		{
+			// not support compare functions
+			arg1:     func() {},
+			arg2:     func() {},
+			expected: false,
+		},
+	}
 
-	if ok := compareValues(reflect.ValueOf(r1), reflect.ValueOf(r2)); !ok {
-		t.Error("r1 should equal r2, but got false")
+	for _, tt := range tests {
+		actual := compareValues(reflect.ValueOf(tt.arg1), reflect.ValueOf(tt.arg2))
+
+		if actual != tt.expected {
+			t.Errorf("compareValues((%T) %v, (%T) %v) got unexpected result: want %v, got %v", tt.arg1, tt.arg1, tt.arg2, tt.arg2, tt.expected, actual)
+		}
 	}
 }
