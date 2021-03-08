@@ -7,6 +7,9 @@ import (
 )
 
 func TestRenderValue(t *testing.T) {
+	secondsEastOfUTC := int((8 * time.Hour).Seconds())
+	beijing := time.FixedZone("Beijing Time", secondsEastOfUTC)
+
 	tests := []struct {
 		val      interface{}
 		expected string
@@ -139,8 +142,8 @@ func TestRenderValue(t *testing.T) {
 ]`,
 		},
 		{
-			val:      time.Date(2020, 1, 1, 10, 0, 0, 0, time.Local),
-			expected: "2020-01-01 10:00:00 +0800 CST",
+			val:      time.Date(2020, 1, 1, 10, 0, 0, 0, beijing),
+			expected: "2020-01-01 10:00:00 +0800 Beijing Time",
 		},
 	}
 
