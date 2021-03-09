@@ -149,6 +149,10 @@ func compareMap(v1, v2 reflect.Value) bool {
 }
 
 func compareStruct(v1, v2 reflect.Value) bool {
+	if v1.Type() == anyType {
+		return true
+	}
+
 	if v2.Kind() != reflect.Struct {
 		if v2.Kind() != reflect.Map {
 			return false

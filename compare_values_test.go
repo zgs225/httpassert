@@ -110,6 +110,21 @@ func TestCompareValues(t *testing.T) {
 			arg2:     func() {},
 			expected: false,
 		},
+		{
+			arg1: paginationData{
+				Total:  1,
+				Offset: 2,
+				Limit:  10,
+				Items:  Any{},
+			},
+			arg2: paginationData{
+				Total:  1,
+				Offset: 2,
+				Limit:  10,
+				Items:  "hello world",
+			},
+			expected: true,
+		},
 	}
 
 	for _, tt := range tests {
