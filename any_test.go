@@ -19,5 +19,11 @@ func TestAny(t *testing.T) {
 		if !actual {
 			t.Errorf("any compare to (%T) %v got unexpected result", tt, tt)
 		}
+
+		actual = any.Equal(tt)
+
+		if !actual {
+			t.Errorf("any compare to (%T) %v got unexpected result", tt, tt)
+		}
 	}
 }
