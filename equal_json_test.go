@@ -11,7 +11,7 @@ func TestEqualJSON(t *testing.T) {
 		json string
 	}{
 		{
-			resp: response{
+			resp: &response{
 				Code:    0,
 				Message: "ok",
 				Data: &paginationData{
