@@ -7,10 +7,16 @@ import (
 )
 
 func TestRenderType(t *testing.T) {
+	var nilV interface{}
+
 	tests := []struct {
 		typ      reflect.Type
 		expected string
 	}{
+		{
+			typ:      reflect.TypeOf(nilV),
+			expected: "interface{}",
+		},
 		{
 			typ:      reflect.TypeOf(1),
 			expected: "int",

@@ -10,10 +10,16 @@ func TestRenderValue(t *testing.T) {
 	secondsEastOfUTC := int((8 * time.Hour).Seconds())
 	beijing := time.FixedZone("Beijing Time", secondsEastOfUTC)
 
+	var nilV interface{}
+
 	tests := []struct {
 		val      interface{}
 		expected string
 	}{
+		{
+			val:      nilV,
+			expected: "nil",
+		},
 		{
 			val:      1,
 			expected: "1",

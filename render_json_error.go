@@ -29,6 +29,10 @@ func renderInterface(i interface{}, n int) string {
 }
 
 func renderType(typ reflect.Type) string {
+	if typ == nil {
+		return "interface{}"
+	}
+
 	var (
 		name string
 		kid  = typ.Kind()
@@ -68,6 +72,8 @@ func renderType(typ reflect.Type) string {
 
 func renderValue(v reflect.Value, n int) string {
 	switch v.Kind() {
+	case reflect.Invalid:
+		return "nil"
 	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
 		return strconv.FormatInt(v.Int(), 10)
 	case reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64:
