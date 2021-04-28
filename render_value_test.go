@@ -114,11 +114,13 @@ func TestRenderValue(t *testing.T) {
         Name: (string) "John",
         Age: (int) 20,
         Height: (float64) 178,
+				Extra: (interface{}) nil,
     },
     {
         Name: (string) "Lily",
         Age: (int) 20,
         Height: (float64) 170,
+				Extra: (interface{}) nil,
     },
 ]`,
 		},
