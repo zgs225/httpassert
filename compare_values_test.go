@@ -21,9 +21,10 @@ type paginationData struct {
 }
 
 type user struct {
-	Name   string  `json:"name"`
-	Age    int     `json:"age"`
-	Height float64 `json:"height"`
+	Name   string      `json:"name"`
+	Age    int         `json:"age"`
+	Height float64     `json:"height"`
+	Extra  interface{} `json:"extra"`
 }
 
 func TestCompareValues(t *testing.T) {
@@ -41,11 +42,13 @@ func TestCompareValues(t *testing.T) {
 					Name:   "John",
 					Age:    18,
 					Height: 182.3,
+					Extra:  "love animals",
 				},
 				{
 					Name:   "Lily",
 					Age:    22,
 					Height: 170.8,
+					Extra:  nil,
 				},
 			},
 		},
@@ -65,11 +68,13 @@ func TestCompareValues(t *testing.T) {
 					"name":   "John",
 					"age":    18,
 					"height": 182.3,
+					"extra":  "love animals",
 				},
 				{
 					"name":   "Lily",
 					"age":    22,
 					"height": 170.8,
+					"extra":  nil,
 				},
 			},
 		},

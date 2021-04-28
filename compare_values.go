@@ -34,9 +34,15 @@ func compareValues(v1, v2 reflect.Value) bool {
 		return compareMap(v1, v2)
 	case reflect.Struct:
 		return compareStruct(v1, v2)
+	case reflect.Invalid:
+		return compareInvalid(v1, v2)
 	}
 
 	return false
+}
+
+func compareInvalid(v1, v2 reflect.Value) bool {
+	return v2.Kind() == reflect.Invalid
 }
 
 func compareBool(v1, v2 reflect.Value) bool {
